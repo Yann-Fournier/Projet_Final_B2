@@ -2,6 +2,10 @@ from selenium import webdriver
 from selenium.webdriver.common.by import By
 import pandas as pd
 import time
+import os
+
+os.makedirs('Scrapping/CSV/Shonen', exist_ok=True)
+os.makedirs('Scrapping/CSV/Auteurs', exist_ok=True)
 
 def rechercheTab(tab, str):
     for var in tab:
@@ -12,7 +16,7 @@ def rechercheTab(tab, str):
 # Créez une instance de navigateur Chrome
 driver = webdriver.Chrome()
 
-categories = ['Shōnen']
+categories = ['Shōnen', 'Seinen']
 urlCategories = ['https://www.amazon.fr/s?i=stripbooks&rh=n%3A27406977031&fs=true&page=1&ref=sr_pg_1']
 
 # Configuration --------------------------------------------------------------------------------------
@@ -20,7 +24,7 @@ driver.get('https://www.amazon.fr')
 time.sleep(20)
 
 driver.get(urlCategories[0])
-time.sleep(5)
+time.sleep(10)
 nbrPage = int(driver.find_element(By.XPATH, '/html/body/div[1]/div[1]/div[1]/div[1]/div/span[1]/div[1]/div[18]/div/div/span/span[4]').text.strip())
 print(nbrPage)  # Nombre de pages web pour faire tout le scrapping
 
@@ -30,8 +34,8 @@ photoAuteur = []
 descAuteur = []
 
 #  Boucle ---------------------------------------------------------------------------------------------
-# for i in range(1, nbrPage+1):
-for i in range(1, 2):
+for i in range(1, nbrPage+1):
+# for i in range(1, 2):
     # Initialisation tableaux à chaque nouvelle page -------------------------------------------------------------------
     nom = []
     description = []
@@ -43,7 +47,7 @@ for i in range(1, 2):
 
     # On va sur chacun des pages
     driver.get(f"https://www.amazon.fr/s?i=stripbooks&rh=n%3A27406977031&fs=true&page={str(i)}&ref=sr_pg_{str(i)}")
-    time.sleep(5)
+    time.sleep(10)
 
     #  Page simple -------------------------------------------------------------------------------
     # Je divise la recupération des liens en deux requêtes, car sinon les xpath est trop grand et l'IDE n'est pas content
@@ -68,7 +72,7 @@ for i in range(1, 2):
         cpt += 1  # tkt
         # On va sur chacune des pages des livres pour récupérer les infos qui nous interesse.
         driver.get(link)
-        time.sleep(5)
+        time.sleep(10)
         try:
             name = driver.find_element(By.XPATH, '/html/body/div[2]/div/div[4]/div[1]/div[8]/div[2]/div/h1/span[1]').text
             nom.append(name)
@@ -149,12 +153,12 @@ for i in range(1, 2):
 
     dfLivres = pd.DataFrame({"Nom": nom, "Prix": prix, "Description": description, "Isbn": isbn, "Photo": photo, "Editeur": editeur, "Auteur": auteur})
     dfLivres.drop_duplicates(ignore_index=True, inplace=True)
-    fileNameLivres = 'CSV/Shonen/shonen' + str(i) + '.csv'
+    fileNameLivres = 'Scrapping/CSV/Shonen/shonen' + str(i) + '.csv'
     dfLivres.to_csv(fileNameLivres, index=False, encoding='utf-8')
 
 dfAuteur = pd.DataFrame({"Nom": nomAuteur, "Description": descAuteur, "Photo": photoAuteur})
 dfAuteur.drop_duplicates(ignore_index=True, inplace=True)
-fileNameAuteur = 'CSV/Auteurs/AuteursShonen.csv'
+fileNameAuteur = 'Scrapping/CSV/Auteurs/AuteursShonen.csv'
 dfAuteur.to_csv(fileNameAuteur, index=False, encoding='utf-8')
 
 # Fermer le navigateur
