@@ -22,31 +22,37 @@
 # print(type("Éditeur ‏ : ‎ "))
 
 #  -----------------------------------------------------------------------------------------------------------------------
-import json
+str = "https://www.amazon.fr/s?i=stripbooks&rh=n%3A27406977031&fs=true&page={}&ref=sr_pg_{}"
 
-# Nouvelles données à ajouter
-nouvelles_donnees = {
-    "nom": "Bob",
-    "age": 25,
-    "profession": "Designer",
-    "langages": ["JavaScript", "HTML", "CSS"]
-}
+for i in range(10):
+    print(str.format(i, i))
 
-# Chemin du fichier JSON
-fichier_json = 'CSV/Pages.json'
-
-# Écrire le tout dans le fichier
-with open(fichier_json, 'w') as fichier:
-    json.dump(nouvelles_donnees, fichier, indent=4)
-
-with open(fichier_json, 'r') as fichier:
-    nouvelles_donnees = json.load(fichier)
-
-nouvelles_donnees["nom"] = "Autre"
-# Écrire le tout dans le fichier
-with open(fichier_json, 'w') as fichier:
-    json.dump(nouvelles_donnees, fichier, indent=4)
-
-print(f"Les nouvelles données ont été ajoutées à {fichier_json}")
+#  -----------------------------------------------------------------------------------------------------------------------
+# import json
+#
+# # Nouvelles données à ajouter
+# nouvelles_donnees = {
+#     "nom": "Bob",
+#     "age": 25,
+#     "profession": "Designer",
+#     "langages": ["JavaScript", "HTML", "CSS"]
+# }
+#
+# # Chemin du fichier JSON
+# fichier_json = 'CSV/Pages.json'
+#
+# # Écrire le tout dans le fichier
+# with open(fichier_json, 'w') as fichier:
+#     json.dump(nouvelles_donnees, fichier, indent=4)
+#
+# with open(fichier_json, 'r') as fichier:
+#     nouvelles_donnees = json.load(fichier)
+#
+# nouvelles_donnees["nom"] = "Autre"
+# # Écrire le tout dans le fichier
+# with open(fichier_json, 'w') as fichier:
+#     json.dump(nouvelles_donnees, fichier, indent=4)
+#
+# print(f"Les nouvelles données ont été ajoutées à {fichier_json}")
 
 

@@ -8,13 +8,13 @@ import json
 driver = webdriver.Chrome()
 
 categories = ['Shōnen']
-urlCategories = ['https://www.amazon.fr/s?i=stripbooks&rh=n%3A27406977031&fs=true&page=1&ref=sr_pg_1']
+urlCategories = ['https://www.amazon.fr/s?i=stripbooks&rh=n%3A27406977031&fs=true&page={}&ref=sr_pg_{}']
 
 # Configuration --------------------------------------------------------------------------------------------------------
 driver.get('https://www.amazon.fr')
 time.sleep(20)
 
-driver.get(urlCategories[0])
+driver.get(urlCategories[0].format(1, 1))
 time.sleep(10)
 nbrPage = int(driver.find_element(By.XPATH, '/html/body/div[1]/div[1]/div[1]/div[1]/div/span[1]/div[1]/div[18]/div/div/span/span[4]').text.strip())
 print(nbrPage)  # Nombre de pages web pour faire tout le scrapping
@@ -40,7 +40,7 @@ for i in range(1, nbrPage+1):
 
     try:
         # On va sur chacun des pages
-        driver.get(f"https://www.amazon.fr/s?i=stripbooks&rh=n%3A27406977031&fs=true&page={str(i)}&ref=sr_pg_{str(i)}")
+        driver.get(urlCategories[0].format(i, i))
         time.sleep(10)
 
         #  Page simple -------------------------------------------------------------------------------------------------
@@ -134,16 +134,24 @@ for i in range(1, nbrPage+1):
 
         if len(nom) == len(description) == len(photo) == len(isbn) == len(editeur) == len(prix) == len(auteur):
             dfLivres = pd.DataFrame({"Nom": nom, "Prix": prix, "Description": description, "Isbn": isbn, "Photo": photo, "Editeur": editeur, "Auteur": auteur})
-            fileNameLivres = 'CSV/Shonen.csv'
-            # fileNameLivres = 'Scrapping/CSV/Shonen/shonen.csv'
-            dfLivres.to_csv(fileNameLivres, mode='a', index=False, header=False, encoding='utf-8')
+            fileNameLivres = 'CSV/' + categories[0] + '.csv'
+            # fileNameLivres = 'Scrapping/CSV/Shonen/' + categories[0] + '.csv'
+            if i == 1:
+                dfLivres.to_csv(fileNameLivres, mode='a', index=False, encoding='utf-8')
+            else:
+                dfLivres.to_csv(fileNameLivres, mode='a', index=False, header=False, encoding='utf-8')
+        else:
             indicesPagesPasPrises.append(i)
 
         if len(nomAuteur) == len(descAuteur) == len(photoAuteur):
             dfAuteur = pd.DataFrame({"Nom": nomAuteur, "Description": descAuteur, "Photo": photoAuteur})
             fileNameAuteur = 'CSV/Auteurs.csv'
             # fileNameAuteur = 'Scrapping/CSV/Auteurs/AuteursShonen.csv'
-            dfAuteur.to_csv(fileNameAuteur,  mode='a', index=False, header=False, encoding='utf-8')
+            if i == 1:
+                dfAuteur.to_csv(fileNameAuteur,  mode='a', index=False, encoding='utf-8')
+            else:
+                dfAuteur.to_csv(fileNameAuteur,  mode='a', index=False, header=False, encoding='utf-8')
+
     except:
         indicesPagesPasPrises.append(i)
 
