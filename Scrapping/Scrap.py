@@ -2,7 +2,6 @@ from selenium import webdriver
 from selenium.webdriver.common.by import By
 import pandas as pd
 import time
-import os
 import json
 
 # Créez une instance de navigateur Chrome
