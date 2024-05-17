@@ -9,11 +9,11 @@
 #
 # test1 = pd.DataFrame({"A": A, "B": B})
 #
-# test1.to_csv("bidule.csv", index=False, encoding='utf-8')
+# test1.to_csv("bidule.csv", encoding='utf-8')
 #
 # test2 = pd.DataFrame({"A": C, "D": D})
 #
-# test2.to_csv("bidule.csv", mode='a', index=False, header=False, encoding='utf-8')
+# test2.to_csv("bidule.csv", mode='a', header=False, encoding='utf-8')
 
 #  -----------------------------------------------------------------------------------------------------------------------
 # bidule = "Éditeur :"
@@ -95,6 +95,7 @@
 #         pass
 #     else:
 #         print(titre, link)
+#  -----------------------------------------------------------------------------------------------------------------------
 
 import json
 # fichier_json = 'CSV/Categories.json'
@@ -107,8 +108,12 @@ import json
 #     truc = json.loads(contenu)
 #     print(truc)
 
+#  -----------------------------------------------------------------------------------------------------------------------
 
-
+# truc = "11,00 €"
+# truc = truc[:-2]
+# truc = truc.replace(',', '.')
+# print(float(truc))
 
 
 

@@ -123,6 +123,7 @@ for key, value in urlCategories.items():
                     priceInt = driver.find_element(By.XPATH, '/html/body/div[2]/div/div[4]/div[1]/div[5]/div[4]/div[4]/div/div[1]/div/div[1]/div/div/div/div[1]/div/div/div[1]/div/div[2]/div/form/div/div/div[2]/div[1]/div[1]/span[2]/span[2]/span[1]').text
                     priceFloat = driver.find_element(By.XPATH, '/html/body/div[2]/div/div[4]/div[1]/div[5]/div[4]/div[4]/div/div[1]/div/div[1]/div/div/div/div[1]/div/div/div[1]/div/div[2]/div/form/div/div/div[2]/div[1]/div[1]/span[2]/span[2]/span[2]').text
                     price = priceInt + "." + priceFloat
+                    print("test :", price)
                     price = float(price)
                 except:
                     price = 0.0
@@ -133,8 +134,25 @@ for key, value in urlCategories.items():
                         price = priceInt + "." + priceFloat
                         price = float(price)
                     except:
+                        price = 0.0
+                if price == 0.0:
+                    try:
+                        priceSTR = driver.find_element(By.XPATH,'/html/body/div[2]/div/div[4]/div[1]/div[5]/div[4]/div[2]/div/div/div/div[2]/span/span/a/span[2]/span')
+                        priceSTR = priceSTR[:-2]
+                        priceSTR = priceSTR.replace(',', '.')
+                        price = float(priceSTR)
+                    except:
+                        price = 0.0
+                if price == 0.0:
+                    try:
+                        priceSTR = driver.find_element(By.XPATH, '/html/body/div[2]/div/div[4]/div[1]/div[5]/div[4]/div[2]/div/div/div[2]/div[2]/span/span/a/span[2]/span')
+                        priceSTR = priceSTR[:-2]
+                        priceSTR = priceSTR.replace(',', '.')
+                        price = float(priceSTR)
+                    except:
                         price = 7.99
-                prix.append(float(price))
+                print(price)
+                prix.append(price)
                 categorie.append(key)
 
                 print(cpt, "/", len(linksInPage))
