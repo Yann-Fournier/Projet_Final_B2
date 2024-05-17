@@ -96,7 +96,16 @@
 #     else:
 #         print(titre, link)
 
+import json
+# fichier_json = 'CSV/Categories.json'
 
+# with open(fichier_json, 'w') as fichier:
+#     json.dump(truc, fichier, indent=4)
+
+# with open(fichier_json, 'r') as fichier_Pages:
+#     contenu = fichier_Pages.read()
+#     truc = json.loads(contenu)
+#     print(truc)
 
 
 
