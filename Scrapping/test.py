@@ -67,34 +67,34 @@
 #     print(value)
 #  -----------------------------------------------------------------------------------------------------------------------
 
-from selenium import webdriver
-from selenium.webdriver.common.by import By
-import pandas as pd
-import time
-import json
-
-# Créez une instance de navigateur Chrome
-driver = webdriver.Chrome()
-
-driver.get('https://www.amazon.fr')
-time.sleep(10)
-
-driver.get('https://www.amazon.fr/gp/browse.html?node=301061&ref_=nav_em__lv_0_2_9_2')
-time.sleep(2)
-
-listBigCategories = driver.find_elements(by=By.XPATH, value='/html/body/div[1]/div[1]/div[2]/div[3]/div[1]/div/div/div/ul')
-dictBigCategories = {}
-
-for category in listBigCategories:
-    print(category.text)
-    # "/html/body/div[1]/div[1]/div[2]/div[3]/div[1]/div/div/div/ul/li[2]"
-    # "/html/body/div[1]/div[1]/div[2]/div[3]/div[1]/div/div/div/ul/li[2]/span/span/div/a"
-    link = category.find_element(by=By.XPATH, value='./span/span/div/a').get_attribute('src')
-    titre = category.find_element(by=By.XPATH, value='./span/span/div/a/h3').text
-    if titre.__contains__("enfants") or titre.__contains__("Scolaire"):
-        pass
-    else:
-        print(titre, link)
+# from selenium import webdriver
+# from selenium.webdriver.common.by import By
+# import pandas as pd
+# import time
+# import json
+#
+# # Créez une instance de navigateur Chrome
+# driver = webdriver.Chrome()
+#
+# driver.get('https://www.amazon.fr')
+# time.sleep(10)
+#
+# driver.get('https://www.amazon.fr/gp/browse.html?node=301061&ref_=nav_em__lv_0_2_9_2')
+# time.sleep(2)
+#
+# listBigCategories = driver.find_elements(by=By.XPATH, value='/html/body/div[1]/div[1]/div[2]/div[3]/div[1]/div/div/div/ul')
+# dictBigCategories = {}
+#
+# for category in listBigCategories:
+#     print(category.text)
+#     # "/html/body/div[1]/div[1]/div[2]/div[3]/div[1]/div/div/div/ul/li[2]"
+#     # "/html/body/div[1]/div[1]/div[2]/div[3]/div[1]/div/div/div/ul/li[2]/span/span/div/a"
+#     link = category.find_element(by=By.XPATH, value='./span/span/div/a').get_attribute('src')
+#     titre = category.find_element(by=By.XPATH, value='./span/span/div/a/h3').text
+#     if titre.__contains__("enfants") or titre.__contains__("Scolaire"):
+#         pass
+#     else:
+#         print(titre, link)
 
 
 
