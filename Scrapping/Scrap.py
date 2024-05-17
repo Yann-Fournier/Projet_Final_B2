@@ -9,10 +9,10 @@ driver = webdriver.Chrome()
 
 fichier_json_url_Categories = 'CSV/Categories.json'
 fichier_json_Pages = 'CSV/Pages.json'
-with open(fichier_json_url_Categories, 'r') as fichier:
-    urlCategories = json.load(fichier)
-with open(fichier_json_Pages, 'r') as fichier:
-    indicesPagesPasPrises = json.load(fichier)  # Les indices des pages qui n'ont pas été scrapper à cause de PB
+with open(fichier_json_url_Categories, 'r') as fichier_Categories:
+    urlCategories = json.load(fichier_Categories)
+with open(fichier_json_Pages, 'r') as fichier_Pages:
+    indicesPagesPasPrises = json.load(fichier_Pages)  # Les indices des pages qui n'ont pas été scrapper à cause de PB
 
 # Configuration --------------------------------------------------------------------------------------------------------
 driver.get('https://www.amazon.fr')
