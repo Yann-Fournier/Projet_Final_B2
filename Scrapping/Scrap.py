@@ -150,8 +150,8 @@ for key, value in urlCategories.items():
 
             if len(nomAuteur) == len(descAuteur) == len(photoAuteur):
                 dfAuteur = pd.DataFrame({"Nom": nomAuteur, "Description": descAuteur, "Photo": photoAuteur})
-                fileNameAuteur = 'CSV/Auteurs.csv'
-                # fileNameAuteur = 'Scrapping/CSV/Auteurs.csv'
+                fileNameAuteur = 'CSV/Auteurs' + key + '.csv'
+                # fileNameAuteur = 'Scrapping/CSV/Auteurs' + key + '.csv'
                 if i == 1:
                     dfAuteur.to_csv(fileNameAuteur,  mode='a', index=False, encoding='utf-8')
                 else:
