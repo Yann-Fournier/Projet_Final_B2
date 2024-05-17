@@ -36,6 +36,7 @@ for key, value in urlCategories.items():
         editeur = []
         prix = []
         auteur = []
+        categorie = []
 
         # Initialisation tableau auteur ------------------------------------------------------------------------------------
         nomAuteur = []
@@ -54,19 +55,16 @@ for key, value in urlCategories.items():
             linksInPage = []  # tableau des liens des livres de la page actuelle
 
             for div in divs: # recuperation des liens des livres de la page actuelle
-                print("ok")
                 try:
-                    xpath = './div/div/span/div/div/div/div[2]/div/div/div[3]/div[1]/div/div[1]/div[1]/a'  # chemin relatif
-                    elm = div.find_element(By.XPATH, xpath).text
-                    print("ok 1")
+                    elm = div.find_element(By.XPATH, './div/div/span/div/div/div/div[2]/div/div/div[3]/div[1]/div/div[1]/div[1]/a').text  # chemin relatif
                 except:
-                    xpath = '/html/body/div[1]/div[1]/div[1]/div[1]/div/span[1]/div[1]/div[3]/div/div/span/div/div/div/div[2]/div/div/div[3]/div[1]/div/div[1]/div[1]/a'  # chemin relatif
-                    elm = div.find_element(By.XPATH, xpath).text
-                    print("ok 2")
+                    elm = div.find_element(By.XPATH, '/html/body/div[1]/div[1]/div[1]/div[1]/div/span[1]/div[1]/div[3]/div/div/span/div/div/div/div[2]/div/div/div[3]/div[1]/div/div[1]/div[1]/a').text  # chemin complet
 
                 if (elm == "Poche" or elm == "Relié" or elm == "Broché" or elm == "Carte"):
-                    linksInPage.append(div.find_element(By.XPATH, './div/div/span/div/div/div/div[1]/div/div[2]/div/span/a').get_attribute('href'))
-                    print("ok 3")
+                    try:
+                        linksInPage.append(div.find_element(By.XPATH, './div/div/span/div/div/div/div[1]/div/div[2]/div/span/a').get_attribute('href'))  # chemin relatif
+                    except:
+                        linksInPage.append(div.find_element(By.XPATH,'/html/body/div[1]/div[1]/div[1]/div[1]/div/span[1]/div[1]/div[2]/div/div/div/div/span/div/div/div/div[1]/div/div[2]/div/span/a').get_attribute('href')) # chemin complet
             print(i, ":", len(linksInPage), "--------------------------------------------------------------------------------------")
 
             cpt = 0  # tkt
@@ -137,11 +135,12 @@ for key, value in urlCategories.items():
                     except:
                         price = 7.99
                 prix.append(float(price))
+                categorie.append(key)
 
                 print(cpt, "/", len(linksInPage))
 
             if len(nom) == len(description) == len(photo) == len(isbn) == len(editeur) == len(prix) == len(auteur):
-                dfLivres = pd.DataFrame({"Nom": nom, "Prix": prix, "Description": description, "Isbn": isbn, "Photo": photo, "Editeur": editeur, "Auteur": auteur})
+                dfLivres = pd.DataFrame({"Nom": nom, "Prix": prix, "Description": description, "Isbn": isbn, "Photo": photo, "Editeur": editeur, "Auteur": auteur, "Categorie": categorie})
                 fileNameLivres = 'CSV/' + key + '.csv'
                 # fileNameLivres = 'Scrapping/CSV/Shonen/' + key + '.csv'
                 if i == 1:
