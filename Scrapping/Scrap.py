@@ -8,13 +8,16 @@ import json
 driver = webdriver.Chrome()
 
 categories = ['Shōnen']
-urlCategories = ['https://www.amazon.fr/s?i=stripbooks&rh=n%3A27406977031&fs=true&page={}&ref=sr_pg_{}']
+urlCategories2 = ['https://www.amazon.fr/s?i=stripbooks&rh=n%3A27406977031&fs=true&page={}&ref=sr_pg_{}']
+
+# urlCategories2 =
 
 # Configuration --------------------------------------------------------------------------------------------------------
 driver.get('https://www.amazon.fr')
 time.sleep(20)
 
-driver.get(urlCategories[0].format(1, 1))
+# for key, value in urlCategories2.items():
+driver.get(urlCategories2[0].format(1, 1))
 time.sleep(10)
 nbrPage = int(driver.find_element(By.XPATH, '/html/body/div[1]/div[1]/div[1]/div[1]/div/span[1]/div[1]/div[18]/div/div/span/span[4]').text.strip())
 print(nbrPage)  # Nombre de pages web pour faire tout le scrapping
@@ -40,7 +43,7 @@ for i in range(1, nbrPage+1):
 
     try:
         # On va sur chacun des pages
-        driver.get(urlCategories[0].format(i, i))
+        driver.get(urlCategories2[0].format(i, i))
         time.sleep(10)
 
         #  Page simple -------------------------------------------------------------------------------------------------
@@ -57,7 +60,7 @@ for i in range(1, nbrPage+1):
                 xpath = './div/div/span/div/div/div/div[2]/div/div/div[2]/div[1]/div/div[1]/div[1]/a'  # chemin relatif
                 elm = div.find_element(By.XPATH, xpath).text
 
-            if (elm == "Poche" or elm == "Relié" or elm == "Broché"):
+            if (elm == "Poche" or elm == "Relié" or elm == "Broché" or elm == "Carte"):
                 linksInPage.append(div.find_element(By.XPATH, './div/div/span/div/div/div/div[1]/div/div[2]/div/span/a').get_attribute('href'))
         print(i, ":", len(linksInPage), "--------------------------------------------------------------------------------------")
 

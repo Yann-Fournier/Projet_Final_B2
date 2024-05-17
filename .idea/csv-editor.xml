@@ -45,14 +45,21 @@
             </Attribute>
           </value>
         </entry>
-        <entry key="\Scrapping\bidule.csv">
+        <entry key="\Scrapping\CSV\Truc-Bidule.csv">
           <value>
             <Attribute>
               <option name="separator" value="," />
             </Attribute>
           </value>
         </entry>
-        <entry key="\Scrapping\truc.csv">
+        <entry key="\Scrapping\CSV\truc bidule.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="\Scrapping\CSV\truc'bidule.csv">
           <value>
             <Attribute>
               <option name="separator" value="," />
