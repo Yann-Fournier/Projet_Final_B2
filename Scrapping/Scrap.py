@@ -3,6 +3,7 @@ from selenium.webdriver.common.by import By
 import pandas as pd
 import time
 import json
+import numpy as np
 
 # Créez une instance de navigateur Chrome
 driver = webdriver.Chrome()
@@ -123,7 +124,7 @@ for key, value in urlCategories.items():
                     priceInt = driver.find_element(By.XPATH, '/html/body/div[2]/div/div[4]/div[1]/div[5]/div[4]/div[4]/div/div[1]/div/div[1]/div/div/div/div[1]/div/div/div[1]/div/div[2]/div/form/div/div/div[2]/div[1]/div[1]/span[2]/span[2]/span[1]').text
                     priceFloat = driver.find_element(By.XPATH, '/html/body/div[2]/div/div[4]/div[1]/div[5]/div[4]/div[4]/div/div[1]/div/div[1]/div/div/div/div[1]/div/div/div[1]/div/div[2]/div/form/div/div/div[2]/div[1]/div[1]/span[2]/span[2]/span[2]').text
                     price = priceInt + "." + priceFloat
-                    print("test :", price)
+                    print("test1 :", price)
                     price = float(price)
                 except:
                     price = 0.0
@@ -132,6 +133,16 @@ for key, value in urlCategories.items():
                         priceInt = driver.find_element(By.XPATH, '/html/body/div[2]/div/div[4]/div[1]/div[5]/div[4]/div[4]/div/div[1]/div/div/div/form/div/div/div/div/div[4]/div/div[2]/div[1]/div[1]/span[2]/span[2]/span[1]').text
                         priceFloat = driver.find_element(By.XPATH, '/html/body/div[2]/div/div[4]/div[1]/div[5]/div[4]/div[4]/div/div[1]/div/div/div/form/div/div/div/div/div[4]/div/div[2]/div[1]/div[1]/span[2]/span[2]/span[2]').text
                         price = priceInt + "." + priceFloat
+                        print("test2 :", price)
+                        price = float(price)
+                    except:
+                        price = 0.0
+                if price == 0.0:
+                    try:
+                        priceInt = driver.find_element(By.XPATH, '/html/body/div[2]/div/div[4]/div[1]/div[5]/div[4]/div[4]/div/div[1]/div/div[2]/div/div/div/div/div/form/div/div/div/div/div[4]/div/div[2]/div[1]/div[1]/span[2]/span[2]/span[1]').text
+                        priceFloat = driver.find_element(By.XPATH, '/html/body/div[2]/div/div[4]/div[1]/div[5]/div[4]/div[4]/div/div[1]/div/div[2]/div/div/div/div/div/form/div/div/div/div/div[4]/div/div[2]/div[1]/div[1]/span[2]/span[2]/span[2]').text
+                        price = priceInt + "." + priceFloat
+                        print("test3 :", price)
                         price = float(price)
                     except:
                         price = 0.0
@@ -150,7 +161,11 @@ for key, value in urlCategories.items():
                         priceSTR = priceSTR.replace(',', '.')
                         price = float(priceSTR)
                     except:
-                        price = 7.99
+                        price = 0.0
+                if price == 0.0:
+                    nombre_aleatoire = np.random.uniform(5.0, 20.0)
+                    price = round(nombre_aleatoire, 2)
+                    print("round", price)
                 print(price)
                 prix.append(price)
                 categorie.append(key)

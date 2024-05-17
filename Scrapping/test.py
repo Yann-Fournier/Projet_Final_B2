@@ -115,6 +115,12 @@ import json
 # truc = truc.replace(',', '.')
 # print(float(truc))
 
+#  -----------------------------------------------------------------------------------------------------------------------
+import numpy as np
+
+# Générer un nombre flottant aléatoire entre 10.0 et 20.0
+nombre_aleatoire = np.random.uniform(10.0, 20.0)
+print(round(nombre_aleatoire, 2))
 
 
 
