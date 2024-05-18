@@ -5,13 +5,14 @@ import time
 import json
 import numpy as np
 
+# Faire les paths multiples pour toutes les différentes infos à récuperer (nom, Desc, Auteur, photo, etc ...)
 # Créez une instance de navigateur Chrome
 driver = webdriver.Chrome()
 
-# fichier_json_url_Categories = 'CSV/Categories.json'
-# fichier_json_Pages = 'CSV/Pages.json'
-fichier_json_url_Categories = 'Scrapping/CSV/Categories.json'
-fichier_json_Pages = 'Scrapping/CSV/Pages.json'
+fichier_json_url_Categories = 'CSV/Categories.json'
+fichier_json_Pages = 'CSV/Pages.json'
+# fichier_json_url_Categories = 'Scrapping/CSV/Categories.json'
+# fichier_json_Pages = 'Scrapping/CSV/Pages.json'
 with open(fichier_json_url_Categories, 'r') as fichier_Categories:
     contenuCategories = fichier_Categories.read()  # Le code bug si je ne transforme pas le json en str en premier
     urlCategories = json.loads(contenuCategories)
@@ -126,7 +127,6 @@ for key, value in urlCategories.items():
                     priceInt = driver.find_element(By.XPATH, '/html/body/div[2]/div/div[4]/div[1]/div[5]/div[4]/div[4]/div/div[1]/div/div[1]/div/div/div/div[1]/div/div/div[1]/div/div[2]/div/form/div/div/div[2]/div[1]/div[1]/span[2]/span[2]/span[1]').text
                     priceFloat = driver.find_element(By.XPATH, '/html/body/div[2]/div/div[4]/div[1]/div[5]/div[4]/div[4]/div/div[1]/div/div[1]/div/div/div/div[1]/div/div/div[1]/div/div[2]/div/form/div/div/div[2]/div[1]/div[1]/span[2]/span[2]/span[2]').text
                     price = priceInt + "." + priceFloat
-                    print("test1 :", price)
                     price = float(price)
                 except:
                     price = 0.0
@@ -135,7 +135,6 @@ for key, value in urlCategories.items():
                         priceInt = driver.find_element(By.XPATH, '/html/body/div[2]/div/div[4]/div[1]/div[5]/div[4]/div[4]/div/div[1]/div/div/div/form/div/div/div/div/div[4]/div/div[2]/div[1]/div[1]/span[2]/span[2]/span[1]').text
                         priceFloat = driver.find_element(By.XPATH, '/html/body/div[2]/div/div[4]/div[1]/div[5]/div[4]/div[4]/div/div[1]/div/div/div/form/div/div/div/div/div[4]/div/div[2]/div[1]/div[1]/span[2]/span[2]/span[2]').text
                         price = priceInt + "." + priceFloat
-                        print("test2 :", price)
                         price = float(price)
                     except:
                         price = 0.0
@@ -144,7 +143,6 @@ for key, value in urlCategories.items():
                         priceInt = driver.find_element(By.XPATH, '/html/body/div[2]/div/div[4]/div[1]/div[5]/div[4]/div[4]/div/div[1]/div/div[2]/div/div/div/div/div/form/div/div/div/div/div[4]/div/div[2]/div[1]/div[1]/span[2]/span[2]/span[1]').text
                         priceFloat = driver.find_element(By.XPATH, '/html/body/div[2]/div/div[4]/div[1]/div[5]/div[4]/div[4]/div/div[1]/div/div[2]/div/div/div/div/div/form/div/div/div/div/div[4]/div/div[2]/div[1]/div[1]/span[2]/span[2]/span[2]').text
                         price = priceInt + "." + priceFloat
-                        print("test3 :", price)
                         price = float(price)
                     except:
                         price = 0.0
@@ -167,7 +165,6 @@ for key, value in urlCategories.items():
                 if price == 0.0:
                     nombre_aleatoire = np.random.uniform(5.0, 20.0)
                     price = round(nombre_aleatoire, 2)
-                    print("round", price)
                 print(price)
                 prix.append(price)
                 categorie.append(key)
@@ -175,10 +172,10 @@ for key, value in urlCategories.items():
                 print(cpt, "/", len(linksInPage))
 
             if len(nom) == len(description) == len(photo) == len(isbn) == len(editeur) == len(prix) == len(auteur):
-                print("ouiiii 11111")
+                time.sleep(1)
                 dfLivres = pd.DataFrame({"Nom": nom, "Prix": prix, "Description": description, "Isbn": isbn, "Photo": photo, "Editeur": editeur, "Auteur": auteur})
-                # fileNameLivres = 'CSV/' + key + '.csv'
-                fileNameLivres = "Scrapping/CSV/Shonen/" + str(key) + ".csv"
+                fileNameLivres = 'CSV/' + key + '.csv'
+                # fileNameLivres = "Scrapping/CSV/Shonen/" + str(key) + ".csv"
                 if i == 1:
                     dfLivres.to_csv(fileNameLivres, index=False, encoding='utf-8')
                 else:
@@ -186,19 +183,29 @@ for key, value in urlCategories.items():
             else:
                 # indicesPagesPasPrises[key].append(i)
                 print("Len livres pas OK")
+                print(len(nom))
+                print(len(description))
+                print(len(photo))
+                print(len(isbn))
+                print(len(editeur))
+                print(len(prix))
+                print(len(auteur))
                 indicesPagesPasPrises2.append(i)
 
             if len(nomAuteur) == len(descAuteur) == len(photoAuteur):
-                print("ouiiii 22222")
+                time.sleep(1)
                 dfAuteur = pd.DataFrame({"Nom": nomAuteur, "Description": descAuteur, "Photo": photoAuteur})
-                # fileNameAuteur = 'CSV/Auteurs' + key + '.csv'
-                fileNameAuteur = "Scrapping/CSV/Auteurs" + str(key) + ".csv"
+                fileNameAuteur = 'CSV/Auteurs' + key + '.csv'
+                # fileNameAuteur = "Scrapping/CSV/Auteurs" + str(key) + ".csv"
                 if i == 1:
                     dfAuteur.to_csv(fileNameAuteur, index=False, encoding='utf-8')
                 else:
                     dfAuteur.to_csv(fileNameAuteur,  mode='a', index=False, header=False, encoding='utf-8')
             else:
                 print("Len auteurs pas OK")
+                print(len(nomAuteur))
+                print(len(descAuteur))
+                print(len(photoAuteur))
         except:
             print("PB recupération des liens des livres")
             # indicesPagesPasPrises[key].append(i)

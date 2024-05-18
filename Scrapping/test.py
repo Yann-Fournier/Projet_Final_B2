@@ -1,19 +1,19 @@
 #  -----------------------------------------------------------------------------------------------------------------------
-import pandas as pd
-
-A = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
-B = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
-
-C = [11, 12, 13, 14, 15, 16, 17, 18, 19, 20]
-D = [11, 12, 13, 14, 15, 16, 17, 18, 19, 20]
-
-test1 = pd.DataFrame({"A": A, "B": B})
-
-test1.to_csv("bidule.csv", encoding='utf-8')
-
-test2 = pd.DataFrame({"A": C, "D": D})
-
-test2.to_csv("Scrapping/CSV/bidule.csv", mode='a', header=False, encoding='utf-8')
+# import pandas as pd
+#
+# A = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+# B = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+#
+# C = [11, 12, 13, 14, 15, 16, 17, 18, 19, 20]
+# D = [11, 12, 13, 14, 15, 16, 17, 18, 19, 20]
+#
+# test1 = pd.DataFrame({"A": A, "B": B})
+#
+# test1.to_csv("bidule.csv", encoding='utf-8')
+#
+# test2 = pd.DataFrame({"A": C, "D": D})
+#
+# test2.to_csv("Scrapping/CSV/bidule.csv", mode='a', header=False, encoding='utf-8')
 
 #  -----------------------------------------------------------------------------------------------------------------------
 # bidule = "Éditeur :"
@@ -139,3 +139,7 @@ test2.to_csv("Scrapping/CSV/bidule.csv", mode='a', header=False, encoding='utf-8
 #         fichiers.append(nom)
 
 # print(fichiers)
+
+import pandas as pd
+truc = pd.read_csv("CSV/Biographies.csv")
+print(truc)

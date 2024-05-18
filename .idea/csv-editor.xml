@@ -3,14 +3,49 @@
   <component name="CsvFileAttributes">
     <option name="attributeMap">
       <map>
-        <entry key="\Scrapping\CSV\AuteursBiographies.csv">
+        <entry key="\Scrapping\CSV\Biographies.csv">
           <value>
             <Attribute>
               <option name="separator" value="," />
             </Attribute>
           </value>
         </entry>
-        <entry key="\Scrapping\CSV\Biographies.csv">
+        <entry key="\Scrapping\CSV\Save\Auteurs.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="\Scrapping\CSV\Save\Shōnen.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="\Scrapping\CSV\Save\shonen1.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="\Scrapping\CSV\Save\shonen2.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="\Scrapping\CSV\Save\shonen3.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="\Scrapping\CSV\Save\shonen4.csv">
           <value>
             <Attribute>
               <option name="separator" value="," />
