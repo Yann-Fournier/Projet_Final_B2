@@ -8,8 +8,10 @@ import numpy as np
 # Créez une instance de navigateur Chrome
 driver = webdriver.Chrome()
 
-fichier_json_url_Categories = 'CSV/Categories.json'
-fichier_json_Pages = 'CSV/Pages.json'
+# fichier_json_url_Categories = 'CSV/Categories.json'
+# fichier_json_Pages = 'CSV/Pages.json'
+fichier_json_url_Categories = 'Scrapping/CSV/Categories.json'
+fichier_json_Pages = 'Scrapping/CSV/Pages.json'
 with open(fichier_json_url_Categories, 'r') as fichier_Categories:
     contenuCategories = fichier_Categories.read()  # Le code bug si je ne transforme pas le json en str en premier
     urlCategories = json.loads(contenuCategories)
@@ -25,7 +27,7 @@ time.sleep(20)
 for key, value in urlCategories.items():
 
     print(key)
-
+    indicesPagesPasPrises2 = []
     #  Boucle des pages --------------------------------------------------------------------------------------------------------------
     for i in range(1, 76):
     # for i in range(1, 2):
@@ -173,31 +175,41 @@ for key, value in urlCategories.items():
                 print(cpt, "/", len(linksInPage))
 
             if len(nom) == len(description) == len(photo) == len(isbn) == len(editeur) == len(prix) == len(auteur):
-                dfLivres = pd.DataFrame({"Nom": nom, "Prix": prix, "Description": description, "Isbn": isbn, "Photo": photo, "Editeur": editeur, "Auteur": auteur, "Categorie": categorie})
-                fileNameLivres = 'CSV/' + key + '.csv'
-                # fileNameLivres = 'Scrapping/CSV/Shonen/' + key + '.csv'
+                print("ouiiii 11111")
+                dfLivres = pd.DataFrame({"Nom": nom, "Prix": prix, "Description": description, "Isbn": isbn, "Photo": photo, "Editeur": editeur, "Auteur": auteur})
+                # fileNameLivres = 'CSV/' + key + '.csv'
+                fileNameLivres = "Scrapping/CSV/Shonen/" + str(key) + ".csv"
                 if i == 1:
-                    dfLivres.to_csv(fileNameLivres, mode='a', index=False, encoding='utf-8')
+                    dfLivres.to_csv(fileNameLivres, index=False, encoding='utf-8')
                 else:
                     dfLivres.to_csv(fileNameLivres, mode='a', index=False, header=False, encoding='utf-8')
             else:
-                indicesPagesPasPrises[key].append(i)
+                # indicesPagesPasPrises[key].append(i)
+                print("Len livres pas OK")
+                indicesPagesPasPrises2.append(i)
 
             if len(nomAuteur) == len(descAuteur) == len(photoAuteur):
+                print("ouiiii 22222")
                 dfAuteur = pd.DataFrame({"Nom": nomAuteur, "Description": descAuteur, "Photo": photoAuteur})
-                fileNameAuteur = 'CSV/Auteurs' + key + '.csv'
-                # fileNameAuteur = 'Scrapping/CSV/Auteurs' + key + '.csv'
+                # fileNameAuteur = 'CSV/Auteurs' + key + '.csv'
+                fileNameAuteur = "Scrapping/CSV/Auteurs" + str(key) + ".csv"
                 if i == 1:
-                    dfAuteur.to_csv(fileNameAuteur,  mode='a', index=False, encoding='utf-8')
+                    dfAuteur.to_csv(fileNameAuteur, index=False, encoding='utf-8')
                 else:
                     dfAuteur.to_csv(fileNameAuteur,  mode='a', index=False, header=False, encoding='utf-8')
+            else:
+                print("Len auteurs pas OK")
         except:
             print("PB recupération des liens des livres")
-            indicesPagesPasPrises[key].append(i)
+            # indicesPagesPasPrises[key].append(i)
+            indicesPagesPasPrises2.append(i)
 
         #  Sauvegarde des pages qui n'ont pas été scrapper par catégories--------------------------------------------------
-        with open(fichier_json_Pages, 'w') as fichier:
-            json.dump(indicesPagesPasPrises, fichier, indent=4)
+        indicesPagesPasPrises[key] = indicesPagesPasPrises2
+    with open(fichier_json_Pages, 'w') as fichier:
+        json.dump(indicesPagesPasPrises, fichier, indent=4)
+
+    
 
 # Fermer le navigateur
 driver.quit()

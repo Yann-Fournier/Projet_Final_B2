@@ -1,19 +1,19 @@
 #  -----------------------------------------------------------------------------------------------------------------------
-# import pandas as pd
-#
-# A = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
-# B = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
-#
-# C = [11, 12, 13, 14, 15, 16, 17, 18, 19, 20]
-# D = [11, 12, 13, 14, 15, 16, 17, 18, 19, 20]
-#
-# test1 = pd.DataFrame({"A": A, "B": B})
-#
-# test1.to_csv("bidule.csv", encoding='utf-8')
-#
-# test2 = pd.DataFrame({"A": C, "D": D})
-#
-# test2.to_csv("bidule.csv", mode='a', header=False, encoding='utf-8')
+import pandas as pd
+
+A = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+B = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+
+C = [11, 12, 13, 14, 15, 16, 17, 18, 19, 20]
+D = [11, 12, 13, 14, 15, 16, 17, 18, 19, 20]
+
+test1 = pd.DataFrame({"A": A, "B": B})
+
+test1.to_csv("bidule.csv", encoding='utf-8')
+
+test2 = pd.DataFrame({"A": C, "D": D})
+
+test2.to_csv("Scrapping/CSV/bidule.csv", mode='a', header=False, encoding='utf-8')
 
 #  -----------------------------------------------------------------------------------------------------------------------
 # bidule = "Éditeur :"
@@ -97,7 +97,7 @@
 #         print(titre, link)
 #  -----------------------------------------------------------------------------------------------------------------------
 
-import json
+# import json
 # fichier_json = 'CSV/Categories.json'
 
 # with open(fichier_json, 'w') as fichier:
@@ -116,12 +116,26 @@ import json
 # print(float(truc))
 
 #  -----------------------------------------------------------------------------------------------------------------------
-import numpy as np
+# import numpy as np
 
-# Générer un nombre flottant aléatoire entre 10.0 et 20.0
-nombre_aleatoire = np.random.uniform(10.0, 20.0)
-print(round(nombre_aleatoire, 2))
-
-
+# # Générer un nombre flottant aléatoire entre 10.0 et 20.0
+# nombre_aleatoire = np.random.uniform(10.0, 20.0)
+# print(round(nombre_aleatoire, 2))
 
 
+#  -----------------------------------------------------------------------------------------------------------------------
+# import os
+
+# # Chemin du dossier à explorer
+# dossier = 'Scrapping/CSV/Save'
+
+# # Liste pour stocker les chemins des fichiers
+# fichiers = []
+
+# # Boucle pour lister les fichiers dans le dossier
+# for nom in os.listdir(dossier):
+#     chemin_complet = os.path.join(dossier, nom)
+#     if os.path.isfile(chemin_complet):
+#         fichiers.append(nom)
+
+# print(fichiers)
