@@ -11,6 +11,30 @@
             margin: 0;
             padding: 0;
         }
+        header {
+            background-color: #333;
+            color: white;
+            padding: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        header .logo {
+            font-size: 1.5em;
+        }
+        header nav {
+            display: flex;
+            gap: 15px;
+        }
+        header nav a {
+            color: white;
+            text-decoration: none;
+            padding: 5px 10px;
+            border-radius: 5px;
+        }
+        header nav a:hover {
+            background-color: #555;
+        }
         .container {
             width: 80%;
             margin: auto;
@@ -68,6 +92,15 @@
     </style>
 </head>
 <body>
+    <header>
+        <div class="logo">Biblio</div>
+        <nav>
+            <a href="index.html">Accueil</a>
+            <a href="profil.html">Profil</a>
+            <a href="connexion.html">Connexion</a>
+            <a href="inscription.html">Inscription</a>
+        </nav>
+    </header>
     <div class="container">
         <h1>Votre Profil BIblio</h1>
         
