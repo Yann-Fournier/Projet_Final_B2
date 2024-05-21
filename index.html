@@ -1,9 +1,224 @@
-<html>
-    <head>
-        <title>Home</title>
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Librairie en Ligne - Accueil</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f8f8;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background-color: #333;
+            color: white;
+            padding: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        header .logo {
+            font-size: 1.5em;
+        }
+        header nav {
+            display: flex;
+            gap: 15px;
+        }
+        header nav a {
+            color: white;
+            text-decoration: none;
+            padding: 5px 10px;
+            border-radius: 5px;
+        }
+        header nav a:hover {
+            background-color: #555;
+        }
+        .container {
+            width: 80%;
+            margin: auto;
+            overflow: hidden;
+        }
+        .carousel {
+            position: relative;
+            margin: 20px 0;
+            overflow: hidden;
+        }
+        .carousel-inner {
+            display: flex;
+            transition: transform 0.5s ease;
+            overflow-x: auto;
+            scrollbar-width: none; 
+            -ms-overflow-style: none; 
+        }
+        .carousel-inner::-webkit-scrollbar {
+            display: none; 
+        }
+        .carousel-item {
+            flex: 0 0 auto;
+            min-width: 33.33%;
+        }
+        .category-item, .book-item {
+            background-color: white;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin: 10px;
+            padding: 15px;
+            text-align: center;
+            width: 100%;
+        }
+        .category-item img, .book-item img {
+            max-width: 100%;
+            height: auto;
+            margin-bottom: 10px;
+        }
+        .category-item h3, .book-item h3 {
+            margin: 5px 0;
+        }
+        .category-item p, .book-item p {
+            color: #555;
+            margin: 5px 0;
+        }
+        .category-item .price {
+            font-weight: bold;
+        }
+        footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 10px 0;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">Biblio</div>
+        <nav>
+            <a href="index.html">Accueil</a>
+            <a href="profil.html">Profil</a>
+            <a href="connexion.html">Connexion</a>
+            <a href="inscription.html">Inscription</a>
+        </nav>
+    </header>
+    <div class="container">
+        <h2>Catégories de Livres</h2>
+        
+        <div class="carousel" id="carousel-categories">
+            <div class="carousel-inner">
+                <div class="carousel-item">
+                    <div class="category-item">
+                        <img src="fiction.jpg" alt="Fiction">
+                        <h3>Fiction</h3>
+                        <p>Explorez des mondes imaginaires et des histoires fascinantes.</p>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <div class="category-item">
+                        <img src="nonfiction.jpg" alt="Non-fiction">
+                        <h3>Non-fiction</h3>
+                        <p>Apprenez des faits réels et des histoires véridiques.</p>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <div class="category-item">
+                        <img src="mystery.jpg" alt="Mystère">
+                        <h3>Mystère</h3>
+                        <p>Plongez dans des intrigues captivantes et des enquêtes.</p>
+                    </div>
+                </div>
+                <!-- Ajoutez plus de catégories si nécessaire -->
+            </div>
+        </div>
 
-    <body>
-        <h1>Home</h1>
-        <p>Welcome to the home page</p>
-    </body>    
+        <h2>Livres par Catégorie</h2>
+        
+        <div class="carousel" id="carousel-books-fiction">
+            <h3>Fiction</h3>
+            <div class="carousel-inner">
+                <div class="carousel-item">
+                    <div class="book-item">
+                        <img src="livre1.jpg" alt="Livre 1">
+                        <h3>Titre du Livre 1</h3>
+                        <p>Auteur: Auteur 1</p>
+                        <p class="price">€20.00</p>
+                        <button>Acheter</button>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <div class="book-item">
+                        <img src="livre2.jpg" alt="Livre 2">
+                        <h3>Titre du Livre 2</h3>
+                        <p>Auteur: Auteur 2</p>
+                        <p class="price">€15.00</p>
+                        <button>Acheter</button>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <div class="book-item">
+                        <img src="livre3.jpg" alt="Livre 3">
+                        <h3>Titre du Livre 3</h3>
+                        <p>Auteur: Auteur 3</p>
+                        <p class="price">€25.00</p>
+                        <button>Acheter</button>
+                    </div>
+                </div>
+                <!-- Ajoutez plus de livres si nécessaire -->
+            </div>
+        </div>
+        <div class="carousel" id="carousel-books-fiction">
+            <h3>Non-Fiction</h3>
+            <div class="carousel-inner">
+                <div class="carousel-item">
+                    <div class="book-item">
+                        <img src="livre1.jpg" alt="Livre 1">
+                        <h3>Titre du Livre 1</h3>
+                        <p>Auteur: Auteur 1</p>
+                        <p class="price">€20.00</p>
+                        <button>Acheter</button>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <div class="book-item">
+                        <img src="livre2.jpg" alt="Livre 2">
+                        <h3>Titre du Livre 2</h3>
+                        <p>Auteur: Auteur 2</p>
+                        <p class="price">€15.00</p>
+                        <button>Acheter</button>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <div class="book-item">
+                        <img src="livre3.jpg" alt="Livre 3">
+                        <h3>Titre du Livre 3</h3>
+                        <p>Auteur: Auteur 3</p>
+                        <p class="price">€25.00</p>
+                        <button>Acheter</button>
+                    </div>
+                </div>
+                <!-- Ajoutez plus de livres si nécessaire -->
+            </div>
+        </div>
+        
+    </div>
+    
+    <footer>
+        <p>&copy; 2024 Librairie en Ligne. Tous droits réservés.</p>
+    </footer>
+
+    <script>
+        const carousels = document.querySelectorAll('.carousel');
+        carousels.forEach(carousel => {
+            const inner = carousel.querySelector('.carousel-inner');
+            const items = carousel.querySelectorAll('.carousel-item');
+            let currentIndex = 0;
+            const totalItems = items.length;
+
+            // setInterval(() => {
+            //     currentIndex = (currentIndex + 1) % totalItems;
+            //     inner.style.transform = `translateX(-${currentIndex * 100}%)`;
+            // }, 3000);
+        });
+    </script>
+</body>
 </html>
