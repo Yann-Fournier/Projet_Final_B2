@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Librairie en Ligne - Accueil</title>
+    <title>Biblio</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -82,6 +82,17 @@
         .category-item .price {
             font-weight: bold;
         }
+        /* .add-to-list-btn {
+            background-color: #555;;
+            color: white;
+            border: black;
+            padding: 4px 2px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 14px;
+            cursor: pointer;
+        } */
         footer {
             background-color: #333;
             color: white;
@@ -127,7 +138,7 @@
                         <p>Plongez dans des intrigues captivantes et des enquêtes.</p>
                     </div>
                 </div>
-                <!-- Ajoutez plus de catégories si nécessaire -->
+                
             </div>
         </div>
 
@@ -142,7 +153,8 @@
                         <h3>Titre du Livre 1</h3>
                         <p>Auteur: Auteur 1</p>
                         <p class="price">€20.00</p>
-                        <button>Acheter</button>
+                        <button>Lire</button>
+                        <button class="add-to-list-btn">Ajouter à la Pile</button>
                     </div>
                 </div>
                 <div class="carousel-item">
@@ -151,7 +163,8 @@
                         <h3>Titre du Livre 2</h3>
                         <p>Auteur: Auteur 2</p>
                         <p class="price">€15.00</p>
-                        <button>Acheter</button>
+                        <button>Lire</button>
+                        <button class="add-to-list-btn">Ajouter à la Pile</button>
                     </div>
                 </div>
                 <div class="carousel-item">
@@ -160,10 +173,11 @@
                         <h3>Titre du Livre 3</h3>
                         <p>Auteur: Auteur 3</p>
                         <p class="price">€25.00</p>
-                        <button>Acheter</button>
+                        <button>Lire</button>
+                        <button class="add-to-list-btn">Ajouter à la Pile</button>
                     </div>
                 </div>
-                <!-- Ajoutez plus de livres si nécessaire -->
+                
             </div>
         </div>
         <div class="carousel" id="carousel-books-fiction">
@@ -175,7 +189,8 @@
                         <h3>Titre du Livre 1</h3>
                         <p>Auteur: Auteur 1</p>
                         <p class="price">€20.00</p>
-                        <button>Acheter</button>
+                        <button>Lire</button>
+                        <button class="add-to-list-btn">Ajouter à la Pile</button>
                     </div>
                 </div>
                 <div class="carousel-item">
@@ -184,7 +199,8 @@
                         <h3>Titre du Livre 2</h3>
                         <p>Auteur: Auteur 2</p>
                         <p class="price">€15.00</p>
-                        <button>Acheter</button>
+                        <button>Lire</button>
+                        <button class="add-to-list-btn">Ajouter à la Pile</button>
                     </div>
                 </div>
                 <div class="carousel-item">
@@ -193,13 +209,49 @@
                         <h3>Titre du Livre 3</h3>
                         <p>Auteur: Auteur 3</p>
                         <p class="price">€25.00</p>
-                        <button>Acheter</button>
+                        <button>Lire</button>
+                        <button class="add-to-list-btn">Ajouter à la Pile</button>
                     </div>
                 </div>
-                <!-- Ajoutez plus de livres si nécessaire -->
+               
             </div>
         </div>
-        
+        <div class="carousel" id="carousel-books-fiction">
+            <h3>Mystère</h3>
+            <div class="carousel-inner">
+                <div class="carousel-item">
+                    <div class="book-item">
+                        <img src="livre1.jpg" alt="Livre 1">
+                        <h3>Titre du Livre 1</h3>
+                        <p>Auteur: Auteur 1</p>
+                        <p class="price">€20.00</p>
+                        <button>Lire</button>
+                        <button class="add-to-list-btn">Ajouter à la Pile</button>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <div class="book-item">
+                        <img src="livre2.jpg" alt="Livre 2">
+                        <h3>Titre du Livre 2</h3>
+                        <p>Auteur: Auteur 2</p>
+                        <p class="price">€15.00</p>
+                        <button>Lire</button>
+                        <button class="add-to-list-btn">Ajouter à la Pile</button>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <div class="book-item">
+                        <img src="livre3.jpg" alt="Livre 3">
+                        <h3>Titre du Livre 3</h3>
+                        <p>Auteur: Auteur 3</p>
+                        <p class="price">€25.00</p>
+                        <button>Lire</button>
+                        <button class="add-to-list-btn">Ajouter à la Pile</button>
+                    </div>
+                </div>
+               
+            </div>
+        </div>
     </div>
     
     <footer>
@@ -219,6 +271,16 @@
             //     inner.style.transform = `translateX(-${currentIndex * 100}%)`;
             // }, 3000);
         });
+        function addToReadingList(bookTitle, bookAuthor) {
+            // À compléter : logique pour ajouter le livre à la pile à lire
+            alert(`Livre "${bookTitle}" par ${bookAuthor} ajouté à la pile à lire.`);
+        }
+
+        // Fonction pour filtrer les livres par catégorie
+        function filterBooksByCategory(category) {
+            // À compléter : logique pour filtrer les livres par catégorie
+            alert(`Affichage des livres de la catégorie "${category}".`);
+        }
     </script>
 </body>
 </html>
