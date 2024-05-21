@@ -9,11 +9,11 @@
 #
 # test1 = pd.DataFrame({"A": A, "B": B})
 #
-# test1.to_csv("bidule.csv", index=False, encoding='utf-8')
+# test1.to_csv("bidule.csv", encoding='utf-8')
 #
 # test2 = pd.DataFrame({"A": C, "D": D})
 #
-# test2.to_csv("bidule.csv", mode='a', index=False, header=False, encoding='utf-8')
+# test2.to_csv("Scrapping/CSV/bidule.csv", mode='a', header=False, encoding='utf-8')
 
 #  -----------------------------------------------------------------------------------------------------------------------
 # bidule = "Éditeur :"
@@ -95,17 +95,51 @@
 #         pass
 #     else:
 #         print(titre, link)
+#  -----------------------------------------------------------------------------------------------------------------------
+
+# import json
+# fichier_json = 'CSV/Categories.json'
+
+# with open(fichier_json, 'w') as fichier:
+#     json.dump(truc, fichier, indent=4)
+
+# with open(fichier_json, 'r') as fichier_Pages:
+#     contenu = fichier_Pages.read()
+#     truc = json.loads(contenu)
+#     print(truc)
+
+#  -----------------------------------------------------------------------------------------------------------------------
+
+# truc = "11,00 €"
+# truc = truc[:-2]
+# truc = truc.replace(',', '.')
+# print(float(truc))
+
+#  -----------------------------------------------------------------------------------------------------------------------
+# import numpy as np
+
+# # Générer un nombre flottant aléatoire entre 10.0 et 20.0
+# nombre_aleatoire = np.random.uniform(10.0, 20.0)
+# print(round(nombre_aleatoire, 2))
 
 
+#  -----------------------------------------------------------------------------------------------------------------------
+# import os
 
+# # Chemin du dossier à explorer
+# dossier = 'Scrapping/CSV/Save'
 
+# # Liste pour stocker les chemins des fichiers
+# fichiers = []
 
+# # Boucle pour lister les fichiers dans le dossier
+# for nom in os.listdir(dossier):
+#     chemin_complet = os.path.join(dossier, nom)
+#     if os.path.isfile(chemin_complet):
+#         fichiers.append(nom)
 
+# print(fichiers)
 
-
-
-
-
-
-
-
+import pandas as pd
+truc = pd.read_csv("CSV/Biographies.csv")
+print(truc)

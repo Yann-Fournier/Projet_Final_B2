@@ -3,16 +3,22 @@ from selenium.webdriver.common.by import By
 import pandas as pd
 import time
 import json
+import numpy as np
 
+# Faire les paths multiples pour toutes les différentes infos à récuperer (nom, Desc, Auteur, photo, etc ...)
 # Créez une instance de navigateur Chrome
 driver = webdriver.Chrome()
 
 fichier_json_url_Categories = 'CSV/Categories.json'
 fichier_json_Pages = 'CSV/Pages.json'
-with open(fichier_json_url_Categories, 'r') as fichier:
-    urlCategories = json.load(fichier)
-with open(fichier_json_Pages, 'r') as fichier:
-    indicesPagesPasPrises = json.load(fichier)  # Les indices des pages qui n'ont pas été scrapper à cause de PB
+# fichier_json_url_Categories = 'Scrapping/CSV/Categories.json'
+# fichier_json_Pages = 'Scrapping/CSV/Pages.json'
+with open(fichier_json_url_Categories, 'r') as fichier_Categories:
+    contenuCategories = fichier_Categories.read()  # Le code bug si je ne transforme pas le json en str en premier
+    urlCategories = json.loads(contenuCategories)
+with open(fichier_json_Pages, 'r') as fichier_Pages:
+    contenuPages = fichier_Pages.read()  # Le code bug si je ne transforme pas le json en str en premier
+    indicesPagesPasPrises = json.loads(contenuPages)  # Les indices des pages qui n'ont pas été scrapper à cause de PB
 
 # Configuration --------------------------------------------------------------------------------------------------------
 driver.get('https://www.amazon.fr')
@@ -21,13 +27,10 @@ time.sleep(20)
 #  Boucle des catégories --------------------------------------------------------------------
 for key, value in urlCategories.items():
 
-    driver.get(value.format(1, 1))
-    time.sleep(10)
-    nbrPage = int(driver.find_element(By.XPATH, '/html/body/div[1]/div[1]/div[1]/div[1]/div/span[1]/div[1]/div[18]/div/div/span/span[4]').text.strip())
-    print(nbrPage)  # Nombre de pages web pour faire tout le scrapping
-
+    print(key)
+    indicesPagesPasPrises2 = []
     #  Boucle des pages --------------------------------------------------------------------------------------------------------------
-    for i in range(1, nbrPage+1):
+    for i in range(1, 76):
     # for i in range(1, 2):
         # Initialisation tableaux à chaque nouvelle page -------------------------------------------------------------------
         nom = []
@@ -37,6 +40,7 @@ for key, value in urlCategories.items():
         editeur = []
         prix = []
         auteur = []
+        categorie = []
 
         # Initialisation tableau auteur ------------------------------------------------------------------------------------
         nomAuteur = []
@@ -54,16 +58,17 @@ for key, value in urlCategories.items():
             divs = divPrincipal.find_elements(By.CLASS_NAME, 's-widget-spacing-small')
             linksInPage = []  # tableau des liens des livres de la page actuelle
 
-            for div in divs:  # recuperation des liens des livres de la page actuelle
+            for div in divs: # recuperation des liens des livres de la page actuelle
                 try:
-                    xpath = './div/div/span/div/div/div/div[2]/div/div/div[3]/div[1]/div/div[1]/div[1]/a'  # chemin relatif
-                    elm = div.find_element(By.XPATH, xpath).text
+                    elm = div.find_element(By.XPATH, './div/div/span/div/div/div/div[2]/div/div/div[3]/div[1]/div/div[1]/div[1]/a').text  # chemin relatif
                 except:
-                    xpath = './div/div/span/div/div/div/div[2]/div/div/div[2]/div[1]/div/div[1]/div[1]/a'  # chemin relatif
-                    elm = div.find_element(By.XPATH, xpath).text
+                    elm = div.find_element(By.XPATH, '/html/body/div[1]/div[1]/div[1]/div[1]/div/span[1]/div[1]/div[3]/div/div/span/div/div/div/div[2]/div/div/div[3]/div[1]/div/div[1]/div[1]/a').text  # chemin complet
 
                 if (elm == "Poche" or elm == "Relié" or elm == "Broché" or elm == "Carte"):
-                    linksInPage.append(div.find_element(By.XPATH, './div/div/span/div/div/div/div[1]/div/div[2]/div/span/a').get_attribute('href'))
+                    try:
+                        linksInPage.append(div.find_element(By.XPATH, './div/div/span/div/div/div/div[1]/div/div[2]/div/span/a').get_attribute('href'))  # chemin relatif
+                    except:
+                        linksInPage.append(div.find_element(By.XPATH,'/html/body/div[1]/div[1]/div[1]/div[1]/div/span[1]/div[1]/div[2]/div/div/div/div/span/div/div/div/div[1]/div/div[2]/div/span/a').get_attribute('href')) # chemin complet
             print(i, ":", len(linksInPage), "--------------------------------------------------------------------------------------")
 
             cpt = 0  # tkt
@@ -132,36 +137,86 @@ for key, value in urlCategories.items():
                         price = priceInt + "." + priceFloat
                         price = float(price)
                     except:
-                        price = 7.99
-                prix.append(float(price))
+                        price = 0.0
+                if price == 0.0:
+                    try:
+                        priceInt = driver.find_element(By.XPATH, '/html/body/div[2]/div/div[4]/div[1]/div[5]/div[4]/div[4]/div/div[1]/div/div[2]/div/div/div/div/div/form/div/div/div/div/div[4]/div/div[2]/div[1]/div[1]/span[2]/span[2]/span[1]').text
+                        priceFloat = driver.find_element(By.XPATH, '/html/body/div[2]/div/div[4]/div[1]/div[5]/div[4]/div[4]/div/div[1]/div/div[2]/div/div/div/div/div/form/div/div/div/div/div[4]/div/div[2]/div[1]/div[1]/span[2]/span[2]/span[2]').text
+                        price = priceInt + "." + priceFloat
+                        price = float(price)
+                    except:
+                        price = 0.0
+                if price == 0.0:
+                    try:
+                        priceSTR = driver.find_element(By.XPATH,'/html/body/div[2]/div/div[4]/div[1]/div[5]/div[4]/div[2]/div/div/div/div[2]/span/span/a/span[2]/span')
+                        priceSTR = priceSTR[:-2]
+                        priceSTR = priceSTR.replace(',', '.')
+                        price = float(priceSTR)
+                    except:
+                        price = 0.0
+                if price == 0.0:
+                    try:
+                        priceSTR = driver.find_element(By.XPATH, '/html/body/div[2]/div/div[4]/div[1]/div[5]/div[4]/div[2]/div/div/div[2]/div[2]/span/span/a/span[2]/span')
+                        priceSTR = priceSTR[:-2]
+                        priceSTR = priceSTR.replace(',', '.')
+                        price = float(priceSTR)
+                    except:
+                        price = 0.0
+                if price == 0.0:
+                    nombre_aleatoire = np.random.uniform(5.0, 20.0)
+                    price = round(nombre_aleatoire, 2)
+                print(price)
+                prix.append(price)
+                categorie.append(key)
 
                 print(cpt, "/", len(linksInPage))
 
             if len(nom) == len(description) == len(photo) == len(isbn) == len(editeur) == len(prix) == len(auteur):
+                time.sleep(1)
                 dfLivres = pd.DataFrame({"Nom": nom, "Prix": prix, "Description": description, "Isbn": isbn, "Photo": photo, "Editeur": editeur, "Auteur": auteur})
                 fileNameLivres = 'CSV/' + key + '.csv'
-                # fileNameLivres = 'Scrapping/CSV/Shonen/' + key + '.csv'
+                # fileNameLivres = "Scrapping/CSV/Shonen/" + str(key) + ".csv"
                 if i == 1:
-                    dfLivres.to_csv(fileNameLivres, mode='a', index=False, encoding='utf-8')
+                    dfLivres.to_csv(fileNameLivres, index=False, encoding='utf-8')
                 else:
                     dfLivres.to_csv(fileNameLivres, mode='a', index=False, header=False, encoding='utf-8')
             else:
-                indicesPagesPasPrises[key].append(i)
+                # indicesPagesPasPrises[key].append(i)
+                print("Len livres pas OK")
+                print(len(nom))
+                print(len(description))
+                print(len(photo))
+                print(len(isbn))
+                print(len(editeur))
+                print(len(prix))
+                print(len(auteur))
+                indicesPagesPasPrises2.append(i)
 
             if len(nomAuteur) == len(descAuteur) == len(photoAuteur):
+                time.sleep(1)
                 dfAuteur = pd.DataFrame({"Nom": nomAuteur, "Description": descAuteur, "Photo": photoAuteur})
                 fileNameAuteur = 'CSV/Auteurs' + key + '.csv'
-                # fileNameAuteur = 'Scrapping/CSV/Auteurs' + key + '.csv'
+                # fileNameAuteur = "Scrapping/CSV/Auteurs" + str(key) + ".csv"
                 if i == 1:
-                    dfAuteur.to_csv(fileNameAuteur,  mode='a', index=False, encoding='utf-8')
+                    dfAuteur.to_csv(fileNameAuteur, index=False, encoding='utf-8')
                 else:
                     dfAuteur.to_csv(fileNameAuteur,  mode='a', index=False, header=False, encoding='utf-8')
+            else:
+                print("Len auteurs pas OK")
+                print(len(nomAuteur))
+                print(len(descAuteur))
+                print(len(photoAuteur))
         except:
-            indicesPagesPasPrises[key].append(i)
+            print("PB recupération des liens des livres")
+            # indicesPagesPasPrises[key].append(i)
+            indicesPagesPasPrises2.append(i)
 
         #  Sauvegarde des pages qui n'ont pas été scrapper par catégories--------------------------------------------------
-        with open(fichier_json_Pages, 'w') as fichier:
-            json.dump(indicesPagesPasPrises, fichier, indent=4)
+        indicesPagesPasPrises[key] = indicesPagesPasPrises2
+    with open(fichier_json_Pages, 'w') as fichier:
+        json.dump(indicesPagesPasPrises, fichier, indent=4)
+
+    
 
 # Fermer le navigateur
 driver.quit()
