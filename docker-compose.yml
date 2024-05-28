@@ -1,0 +1,36 @@
+version: '3'
+
+services:
+  db:
+    build: /BDD
+    image: mysql:latest
+    container_name: db
+    ports:
+      - "3306:3306"
+    # command: --default-authentication-plugin=mysql_native_password
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: projet_final
+    networks:
+      my_network:
+        ipv4_address: 172.16.238.10
+
+  web:
+    build: ./Serveur
+    image: nginx:latest
+    container_name: API
+    ports:
+      - "8080:80" 
+    networks:
+      my_network:
+        ipv4_address: 172.16.238.11
+
+networks:
+  my_network:
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+        - subnet: 172.16.238.0/24
+  
