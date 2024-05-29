@@ -22,7 +22,7 @@ public class SQLRequest
 
         bool isConnected = false;
 
-        while !isConnected {
+        while (!isConnected) {
             // Création de la connection
             MySqlConnection connection = new MySqlConnection(connectionString);
             try
@@ -31,13 +31,14 @@ public class SQLRequest
                 connection.Open();
                 Console.WriteLine("Connexion réussie à la base de données MySql!");
                 isConnected = true;
+                return connection;
             }
             catch (Exception ex)
             {
                 Console.WriteLine("Erreur de connexion: " + ex.Message);
             }
         }
-        return connection;
+        return new MySqlConnection("");
     }
 
     public static dynamic ExecuteSelectQuery(MySqlConnection connection, string query)
