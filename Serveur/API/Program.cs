@@ -16,7 +16,7 @@ class Program
     static async Task Main(string[] args)
     {
         // Connection à la base de données
-        SQLiteConnection connection = SQLRequest.OpenBDDConnection();
+        MySqlConnection connection = SQLRequest.OpenBDDConnection();
 
         // Création de l'api en localhost sur le port 8080
         string url = "http://localhost:8080/";
@@ -41,7 +41,7 @@ class Program
         }
     }
 
-    static async Task ProcessRequest(HttpListenerContext context, SQLiteConnection connection)
+    static async Task ProcessRequest(HttpListenerContext context, MySqlConnection connection)
     {
         // Initialisation de la réponse
         dynamic data = new int[0]; // Variable qui recupérera les json des requetes sql.  
@@ -771,7 +771,7 @@ class Program
                             {
                                 // Condition remplie, insérez les données
                                 string insertQuery = "INSERT INTO Collec (Id_Livre, Id_Collection) VALUES (" + parameters["livre_id"] + ", " + parameters["collection_id"] + ");";
-                                using (SQLiteCommand insertCommand = new SQLiteCommand(insertQuery, connection))
+                                using (MySqlCommand insertCommand = new MySqlCommand(insertQuery, connection))
                                 {
                                     int rowsAffected = insertCommand.ExecuteNonQuery();
                                     data = "Vous venez d'ajouter un livre à une de vos collection";
@@ -818,7 +818,7 @@ class Program
                             {
                                 // Condition remplie, suppression des données
                                 string insertQuery = "DELETE FROM Collec WHERE Id_Livre = " + parameters["livre_id"] + " AND Id_Collection = " + parameters["collection_id"] + ";";
-                                using (SQLiteCommand insertCommand = new SQLiteCommand(insertQuery, connection))
+                                using (MySqlCommand insertCommand = new MySqlCommand(insertQuery, connection))
                                 {
                                     int rowsAffected = insertCommand.ExecuteNonQuery();
                                     data = "Vous venez de supprimer un livre d'une de vos collection";

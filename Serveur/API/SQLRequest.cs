@@ -14,14 +14,14 @@ namespace app;
 public class SQLRequest
 {
     // Connection à la base de données ------------------------------------------------------------------------------------------------------
-    public static SQLiteConnection OpenBDDConnection()
+    public static MySqlConnection OpenBDDConnection()
     {
         // string connectionString = "Data Source=chemin_de_la_database";
         // string connectionString = @"Data Source=../BDD_Projet_Final_B2/Database_Biblio.db"; // Chemin relatif
         string connectionString = $"serve=172.16.238.10;port=3306;User ID=root;Password=root;";
 
         // Création de la connection
-        SQLiteConnection connection = new SQLiteConnection(connectionString);
+        MySqlConnection connection = new MySqlConnection(connectionString);
         try
         {
             // Ouverture de la connection avec la base de données
@@ -35,12 +35,12 @@ public class SQLRequest
         return connection;
     }
 
-    public static dynamic ExecuteSelectQuery(SQLiteConnection connection, string query)
+    public static dynamic ExecuteSelectQuery(MySqlConnection connection, string query)
     {
         DataTable dataTable = new DataTable();
         // Console.WriteLine(query);
-        using (SQLiteCommand command = new SQLiteCommand(query, connection))
-        using (SQLiteDataAdapter adapter = new SQLiteDataAdapter(command))
+        using (MySqlCommand command = new MySqlCommand(query, connection))
+        using (MySqlDataAdapter adapter = new MySqlDataAdapter(command))
         {
             adapter.Fill(dataTable);
         }
@@ -49,9 +49,9 @@ public class SQLRequest
         return JsonConvert.DeserializeObject(jsonResult);
     }
 
-    public static void ExecuteOtherQuery(SQLiteConnection connection, string query)
+    public static void ExecuteOtherQuery(MySqlConnection connection, string query)
     {
-        SQLiteCommand command = new SQLiteCommand(query, connection);
+        MySqlCommand command = new MySqlCommand(query, connection);
         int rowsAffected = command.ExecuteNonQuery();
     }
 }
