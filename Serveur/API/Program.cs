@@ -19,7 +19,7 @@ class Program
         MySqlConnection connection = SQLRequest.OpenBDDConnection();
 
         // Création de l'api en localhost sur le port 8080
-        string url = "http://localhost:8080/";
+        string url = "http://172.16.238.11:80/";
         var listener = new HttpListener();
         listener.Prefixes.Add(url);
         listener.Start();
