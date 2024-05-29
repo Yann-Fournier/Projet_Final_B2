@@ -88,7 +88,7 @@ class Program
         {
             if (parameters.Count != 0)
             {
-                data = "They are too many parameters.";
+                pasOk = true;
             }
             else
             {
@@ -99,11 +99,18 @@ class Program
         {
             switch (path)
             {
-                case "/get_token": // param : , user_id
-                    if (parameters.Count == 1)
+                case "/get_token": // param : email, mdp
+                    if (parameters.Count == 2)
                     {
-                        data = SQLRequest.ExecuteSelectQuery(connection, "SELECT Token FROM Auth WHERE Id = " + parameters["user_id"] + ";");
-                        pasOk = false;
+                        try
+                        {
+                            data = SQLRequest.ExecuteSelectQuery(connection, "SELECT Token FROM Auth JOIN Users ON Auth.Id = Users.Id WHERE Mdp = '" + SQLRequest.HashPwd(parameters["mdp"]) + "' AND Email = '" + parameters["email"] + "';");
+                            pasOk = false;
+                        }
+                        catch (Exception e)
+                        {
+                            pasOk = true;
+                        }
                     }
                     else
                     {
@@ -401,12 +408,12 @@ class Program
                         pasOk = true;
                     }
                     break;
-                case "/user/create": // param : email, mdp, photo, nom, is_admin
+                case "/user/create": // param : email, mdp, photo, nom
                     if (parameters.Count == 5)
                     {
                         try
                         {
-                            string query = "INSERT INTO Users (Email, Mdp, Photo, Nom, Is_Admin) VALUES ('" + parameters["email"] + "', '" + parameters["mdp"] + "', '" + parameters["photo"] + "', '" + parameters["nom"] + "', " + parameters["is_admin"] + ");";
+                            string query = "INSERT INTO Users (Email, Mdp, Photo, Nom, Is_Admin) VALUES ('" + parameters["email"] + "', '" + parameters["mdp"] + "', 0);";
                             SQLRequest.ExecuteOtherQuery(connection, query);
                             data = "Vous avez ajouter un auteur";
                             pasOk = false;
