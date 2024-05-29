@@ -20,17 +20,22 @@ public class SQLRequest
         // string connectionString = @"Data Source=../BDD_Projet_Final_B2/Database_Biblio.db"; // Chemin relatif
         string connectionString = $"server=172.16.238.10;port=3306;User ID=root;Password=root;";
 
-        // Création de la connection
-        MySqlConnection connection = new MySqlConnection(connectionString);
-        try
-        {
-            // Ouverture de la connection avec la base de données
-            connection.Open();
-            Console.WriteLine("Connexion réussie à la base de données MySql!");
-        }
-        catch (Exception ex)
-        {
-            Console.WriteLine("Erreur de connexion: " + ex.Message);
+        bool isConnected = false;
+
+        while !isConnected {
+            // Création de la connection
+            MySqlConnection connection = new MySqlConnection(connectionString);
+            try
+            {
+                // Ouverture de la connection avec la base de données
+                connection.Open();
+                Console.WriteLine("Connexion réussie à la base de données MySql!");
+                isConnected = true;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Erreur de connexion: " + ex.Message);
+            }
         }
         return connection;
     }
@@ -53,5 +58,22 @@ public class SQLRequest
     {
         MySqlCommand command = new MySqlCommand(query, connection);
         int rowsAffected = command.ExecuteNonQuery();
+    }
+
+    public static String HashPwd(string mdp)
+    {
+        using (SHA256Managed sha1 = new SHA256Managed())
+        {
+            var hash = sha1.ComputeHash(Encoding.UTF8.GetBytes(mdp));
+            var sb = new StringBuilder(hash.Length * 2);
+
+            foreach (byte b in hash)
+            {
+                // can be "x2" if you want lowercase
+                sb.Append(b.ToString("X2"));
+            }
+
+            return sb.ToString();
+        }
     }
 }
