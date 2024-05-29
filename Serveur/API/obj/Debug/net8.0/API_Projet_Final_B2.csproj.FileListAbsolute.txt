@@ -183,3 +183,12 @@ C:\Users\yfour\OneDrive\Documents\cours_Ynov\B2\Projet_Final_B2\All_Projet_Final
 C:\Users\yfour\OneDrive\Documents\cours_Ynov\B2\Projet_Final_B2\All_Projet_Final_B2\Serveur\API\obj\Debug\net8.0\API_Projet_Final_B2.csproj.CopyComplete
 C:\Users\yfour\OneDrive\Documents\cours_Ynov\B2\Projet_Final_B2\All_Projet_Final_B2\Serveur\API\obj\Debug\net8.0\API_Projet_Final_B2.genruntimeconfig.cache
 C:\Users\yfour\OneDrive\Documents\cours_Ynov\B2\Projet_Final_B2\All_Projet_Final_B2\Serveur\API\obj\Debug\net8.0\ref\API_Projet_Final_B2.dll
+C:\Users\patch\Desktop\B2\Projet_Final_B2\Serveur\API\obj\Debug\net8.0\API_Projet_Final_B2.csproj.AssemblyReference.cache
+C:\Users\patch\Desktop\B2\Projet_Final_B2\Serveur\API\obj\Debug\net8.0\API_Projet_Final_B2.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\patch\Desktop\B2\Projet_Final_B2\Serveur\API\obj\Debug\net8.0\API_Projet_Final_B2.AssemblyInfoInputs.cache
+C:\Users\patch\Desktop\B2\Projet_Final_B2\Serveur\API\obj\Debug\net8.0\API_Projet_Final_B2.AssemblyInfo.cs
+C:\Users\patch\Desktop\B2\Projet_Final_B2\Serveur\API\obj\Debug\net8.0\API_Projet_Final_B2.csproj.CoreCompileInputs.cache
+C:\Users\patch\Desktop\B2\Projet_Final_B2\Serveur\API\obj\Debug\net8.0\API_Projet_Final_B2.sourcelink.json
+C:\Users\patch\Desktop\B2\Projet_Final_B2\Serveur\API\obj\Debug\net8.0\API_Projet_Final_B2.dll
+C:\Users\patch\Desktop\B2\Projet_Final_B2\Serveur\API\obj\Debug\net8.0\refint\API_Projet_Final_B2.dll
+C:\Users\patch\Desktop\B2\Projet_Final_B2\Serveur\API\obj\Debug\net8.0\API_Projet_Final_B2.pdb

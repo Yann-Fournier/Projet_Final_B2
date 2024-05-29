@@ -1,24 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\yfour\\OneDrive\\Documents\\cours_Ynov\\B2\\Projet_Final_B2\\All_Projet_Final_B2\\Serveur\\API\\API_Projet_Final_B2.csproj": {}
+    "C:\\Users\\patch\\Desktop\\B2\\Projet_Final_B2\\Serveur\\API\\API_Projet_Final_B2.csproj": {}
   },
   "projects": {
-    "C:\\Users\\yfour\\OneDrive\\Documents\\cours_Ynov\\B2\\Projet_Final_B2\\All_Projet_Final_B2\\Serveur\\API\\API_Projet_Final_B2.csproj": {
+    "C:\\Users\\patch\\Desktop\\B2\\Projet_Final_B2\\Serveur\\API\\API_Projet_Final_B2.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\yfour\\OneDrive\\Documents\\cours_Ynov\\B2\\Projet_Final_B2\\All_Projet_Final_B2\\Serveur\\API\\API_Projet_Final_B2.csproj",
+        "projectUniqueName": "C:\\Users\\patch\\Desktop\\B2\\Projet_Final_B2\\Serveur\\API\\API_Projet_Final_B2.csproj",
         "projectName": "API_Projet_Final_B2",
-        "projectPath": "C:\\Users\\yfour\\OneDrive\\Documents\\cours_Ynov\\B2\\Projet_Final_B2\\All_Projet_Final_B2\\Serveur\\API\\API_Projet_Final_B2.csproj",
-        "packagesPath": "C:\\Users\\yfour\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\yfour\\OneDrive\\Documents\\cours_Ynov\\B2\\Projet_Final_B2\\All_Projet_Final_B2\\Serveur\\API\\obj\\",
+        "projectPath": "C:\\Users\\patch\\Desktop\\B2\\Projet_Final_B2\\Serveur\\API\\API_Projet_Final_B2.csproj",
+        "packagesPath": "C:\\Users\\patch\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\patch\\Desktop\\B2\\Projet_Final_B2\\Serveur\\API\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-        ],
         "configFilePaths": [
-          "C:\\Users\\yfour\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Users\\patch\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -38,6 +34,11 @@
           "warnAsError": [
             "NU1605"
           ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
         }
       },
       "frameworks": {
@@ -81,7 +82,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.101/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.202/PortableRuntimeIdentifierGraph.json"
         }
       }
     }
