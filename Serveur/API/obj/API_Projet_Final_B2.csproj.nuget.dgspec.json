@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\yfour\\OneDrive\\Documents\\cours_Ynov\\B2\\Projet_Final_B2\\API_Projet_Final_B2\\API_Projet_Final_B2.csproj": {}
+    "C:\\Users\\yfour\\OneDrive\\Documents\\cours_Ynov\\B2\\Projet_Final_B2\\All_Projet_Final_B2\\Serveur\\API\\API_Projet_Final_B2.csproj": {}
   },
   "projects": {
-    "C:\\Users\\yfour\\OneDrive\\Documents\\cours_Ynov\\B2\\Projet_Final_B2\\API_Projet_Final_B2\\API_Projet_Final_B2.csproj": {
+    "C:\\Users\\yfour\\OneDrive\\Documents\\cours_Ynov\\B2\\Projet_Final_B2\\All_Projet_Final_B2\\Serveur\\API\\API_Projet_Final_B2.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\yfour\\OneDrive\\Documents\\cours_Ynov\\B2\\Projet_Final_B2\\API_Projet_Final_B2\\API_Projet_Final_B2.csproj",
+        "projectUniqueName": "C:\\Users\\yfour\\OneDrive\\Documents\\cours_Ynov\\B2\\Projet_Final_B2\\All_Projet_Final_B2\\Serveur\\API\\API_Projet_Final_B2.csproj",
         "projectName": "API_Projet_Final_B2",
-        "projectPath": "C:\\Users\\yfour\\OneDrive\\Documents\\cours_Ynov\\B2\\Projet_Final_B2\\API_Projet_Final_B2\\API_Projet_Final_B2.csproj",
+        "projectPath": "C:\\Users\\yfour\\OneDrive\\Documents\\cours_Ynov\\B2\\Projet_Final_B2\\All_Projet_Final_B2\\Serveur\\API\\API_Projet_Final_B2.csproj",
         "packagesPath": "C:\\Users\\yfour\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\yfour\\OneDrive\\Documents\\cours_Ynov\\B2\\Projet_Final_B2\\API_Projet_Final_B2\\obj\\",
+        "outputPath": "C:\\Users\\yfour\\OneDrive\\Documents\\cours_Ynov\\B2\\Projet_Final_B2\\All_Projet_Final_B2\\Serveur\\API\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

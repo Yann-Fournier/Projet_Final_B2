@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "Pb3MKPl3IZ85GZUhR3YiKgCWF7dt++WwyZlJqyxGXaS+ccrzzcB7jSVIQfSdNVyoSq6jFm/1dj+w/vb4OpIGyA==",
+  "dgSpecHash": "USegMVdnVUgXO+tUQzmEpJvB6hwZXjQ0987UrO/DM1+Tm6VRRpCQ2wrzlMcDVdJPBNwji04iZ839DGk+MLZT5Q==",
   "success": true,
-  "projectFilePath": "C:\\Users\\yfour\\OneDrive\\Documents\\cours_Ynov\\B2\\Projet_Final_B2\\API_Projet_Final_B2\\API_Projet_Final_B2.csproj",
+  "projectFilePath": "C:\\Users\\yfour\\OneDrive\\Documents\\cours_Ynov\\B2\\Projet_Final_B2\\All_Projet_Final_B2\\Serveur\\API\\API_Projet_Final_B2.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\yfour\\.nuget\\packages\\bouncycastle.cryptography\\2.2.1\\bouncycastle.cryptography.2.2.1.nupkg.sha512",
     "C:\\Users\\yfour\\.nuget\\packages\\entityframework\\6.4.4\\entityframework.6.4.4.nupkg.sha512",
