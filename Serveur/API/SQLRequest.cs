@@ -25,6 +25,7 @@ public class SQLRequest
         {
             // Création de la connection
             MySqlConnection connection = new MySqlConnection(connectionString);
+            
             // Ouverture de la connection avec la base de données
             connection.Open();
             Console.WriteLine("Connexion réussie à la base de données MySql!");
