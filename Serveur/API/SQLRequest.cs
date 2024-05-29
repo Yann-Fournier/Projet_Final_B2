@@ -20,10 +20,11 @@ public class SQLRequest
         // string connectionString = @"Data Source=../BDD_Projet_Final_B2/Database_Biblio.db"; // Chemin relatif
         string connectionString = $"serve=172.16.238.10;port=3306;User ID=root;Password=root;";
 
-        // Création de la connection
-        MySqlConnection connection = new MySqlConnection(connectionString);
+
         try
         {
+            // Création de la connection
+            MySqlConnection connection = new MySqlConnection(connectionString);
             // Ouverture de la connection avec la base de données
             connection.Open();
             Console.WriteLine("Connexion réussie à la base de données MySql!");
