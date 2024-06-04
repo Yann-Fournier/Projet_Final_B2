@@ -13,13 +13,13 @@ using app;
 
 class Program
 {
-    static async Task Main(string[] args)
+     static async Task Main(string[] args)
     {
         // Connection à la base de données
         MySqlConnection connection = SQLRequest.OpenBDDConnection();
 
         // Création de l'api en localhost sur le port 8080
-        string url = "http://172.16.238.11:80/";
+        string url = "http://localhost:8080/";
         var listener = new HttpListener();
         listener.Prefixes.Add(url);
         listener.Start();
@@ -190,7 +190,7 @@ class Program
                         }
                         else if (keys[0] == "user_name")
                         {
-                            data = SQLRequest.ExecuteSelectQuery(connection, "SELECT * FROM Users WHERE Nom = '" + parameters["user_name"] + "';");
+                            data = SQLRequest.ExecuteSelectQuery(connection, "SELECT * FROM Users WHERE Nom = '*" + parameters["user_name"] + "*';");
                             pasOk = false;
                         }
                         else
