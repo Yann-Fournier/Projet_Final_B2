@@ -3,3 +3,14 @@ WORKDIR /app
 COPY . /app
 ADD script.sql /docker-entrypoint-initdb.d
 EXPOSE 3306
+# RUN mkdir Scripts_python
+# # Copy des csv et du script python
+# COPY BDD/Scrapping/CSV /Scripts_python/CSV
+# COPY BDD/Fill_Database_Biblio.py /Scripts_python
+# # Installation python
+# COPY ./Fill_BD.sh /Scripts_python
+# RUN chmod +x ./Scripts_python/Fill_BD.sh
+# RUN ./Scripts_python/Fill_BD.sh
+# # Run du code python
+# RUN ./Scripts_python/Fill_Database_Biblio.py
+# RUN echo "Database fill !!! --------------------------------------------------------------------"

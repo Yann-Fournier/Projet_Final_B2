@@ -5,6 +5,7 @@ import hashlib
 import json
 import mysql.connector
 from mysql.connector import Error
+import time
 
 # Sqlite ---------------------------------------------
 # connection = sqlite3.connect('Database_Biblio.db')  # Se connecter à la base de données
@@ -12,6 +13,7 @@ from mysql.connector import Error
 
 # MySQL ---------------------------------------------
 try:
+    time.sleep(10)
     # Établir la connexion
     connection = mysql.connector.connect(
         host='localhost',        # Remplacez par le nom de votre hôte

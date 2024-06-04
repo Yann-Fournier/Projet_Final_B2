@@ -9,6 +9,7 @@ using System.IO;
 using System.Data.SQLite;
 using Newtonsoft.Json;
 using System.Text.Json;
+using System.Threading;
 using app;
 
 class Program
@@ -28,6 +29,7 @@ class Program
         // Boucle permettant de récuperer les requêtes
         while (true)
         {
+            Thread.Sleep(10000);
             try
             {
                 Console.WriteLine($"En attente d'une requetes");
