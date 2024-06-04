@@ -1,5 +1,3 @@
-version: '3'
-
 services:
   db:
     build: /BDD
@@ -21,9 +19,9 @@ services:
     image: nginx:latest
     container_name: API
     ports:
-      - "6969:80" 
+      - "8080:80" 
     depends_on:
-      - db  
+      - db 
     networks:
       my_network:
         ipv4_address: 172.16.238.11
