@@ -9,7 +9,7 @@ ADD installationDotNet.sh /docker-entrypoint.d
 ADD start.sh /docker-entrypoint.d
 RUN chmod +x /installationDotNet.sh
 RUN chmod +x /start.sh
-RUN /installationDotNet.sh
+RUN ./installationDotNet.sh
 COPY web.conf /etc/nginx/conf.d/web.conf
 EXPOSE 80
 CMD ["/start.sh"]
