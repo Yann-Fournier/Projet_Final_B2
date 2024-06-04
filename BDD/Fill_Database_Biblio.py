@@ -65,7 +65,7 @@ def load_data():
     insert_auth(4, hash_passwd("Adriana"))
     
     # Toutes les catégories
-    fichier_json_url_categories = 'Scrapping/CSV/Categories.json'
+    fichier_json_url_categories = 'CSV/Categories.json'
     with open(fichier_json_url_categories, 'r') as fichier_categories:
         contenu_categories = fichier_categories.read()  # Le code bug si je ne transforme pas le json en str en premier
         url_categories = json.loads(contenu_categories)
@@ -77,12 +77,12 @@ def load_data():
         cpt += 1
 
     # Tous les Auteurs
-    auteurs = pd.read_csv("Scrapping/CSV/Save/Auteurs_combined.csv")
+    auteurs = pd.read_csv("CSV/Save/Auteurs_combined.csv")
     for i in range(len(auteurs)):
         insert_auteur(i, auteurs["Nom"][i], auteurs["Description"][i], auteurs["Photo"][i])
 
     # Tous les Livres
-    livres = pd.read_csv("Scrapping/CSV/Save/Shōnen_combined.csv")
+    livres = pd.read_csv("CSV/Save/Shōnen_combined.csv")
     cursor.execute("SELECT Id FROM Categories WHERE Nom = 'Shōnen';")  # Id = 55
     results_id_category = cursor.fetchall()  # renvoie un tableau de tuple
     for i in range(len(livres)):
