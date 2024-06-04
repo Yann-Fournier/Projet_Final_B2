@@ -3,9 +3,33 @@ import pandas as pd
 import sqlite3
 import hashlib
 import json
+import mysql.connector
+from mysql.connector import Error
 
-conn = sqlite3.connect('Database_Biblio.db')  # Se connecter à la base de données
-cur = conn.cursor()  # Créer un curseur
+# Sqlite ---------------------------------------------
+# connection = sqlite3.connect('Database_Biblio.db')  # Se connecter à la base de données
+# cursor = connection.cursor()  # Créer un curseur
+
+# MySQL ---------------------------------------------
+try:
+    # Établir la connexion
+    connection = mysql.connector.connect(
+        host='localhost',        # Remplacez par le nom de votre hôte
+        database='db', # Remplacez par le nom de votre base de données
+        user='root',         # Remplacez par votre nom d'utilisateur
+        password='root'  # Remplacez par votre mot de passe
+    )
+
+    if connection.is_connected():
+        db_info = connection.get_server_info()
+        print(f"Connecté à MySQL Server version {db_info}")
+        cursor = connection.cursor()
+        cursor.execute("SELECT DATABASE();")
+        record = cursor.fetchone()
+        print(f"Vous êtes connecté à la base de données: {record}")
+
+except Error as e:
+    print(f"Erreur lors de la connexion à MySQL: {e}")
 
 
 def load_sql():
@@ -13,8 +37,8 @@ def load_sql():
         script_sql = fichier.read()
 
     try:
-        cur.executescript(script_sql)  # execution du script
-        conn.commit()  # enregistrement des changements
+        cursor.executescript(script_sql)  # execution du script
+        connection.commit()  # enregistrement des changements
         print("Script SQL exécuté avec succès")
 
     except sqlite3.Error as e:
@@ -57,12 +81,12 @@ def load_data():
 
     # Tous les Livres
     livres = pd.read_csv("Scrapping/CSV/Save/Shōnen_combined.csv")
-    cur.execute("SELECT Id FROM Categories WHERE Nom = 'Shōnen';")  # Id = 55
-    results_id_category = cur.fetchall()  # renvoie un tableau de tuple
+    cursor.execute("SELECT Id FROM Categories WHERE Nom = 'Shōnen';")  # Id = 55
+    results_id_category = cursor.fetchall()  # renvoie un tableau de tuple
     for i in range(len(livres)):
         query = "SELECT Id FROM Auteurs WHERE Nom = '" + str(livres["Auteur"][i]) + "';"
-        cur.execute(query)
-        results_id_auteur = cur.fetchall()  # renvoie un tableau de tuple
+        cursor.execute(query)
+        results_id_auteur = cursor.fetchall()  # renvoie un tableau de tuple
         insert_livre(i, results_id_auteur[0][0], results_id_category[0][0], str(livres["Nom"][i]),
                      str(livres["Description"][i]), str(livres["Photo"][i]), str(livres["Isbn"][i]),
                      str(livres["Editeur"][i]), float(livres["Prix"][i]))
@@ -130,9 +154,9 @@ def insert_user(Id, Email, Mdp, Photo, Nom, Is_Admin, data=None):
         data = [
             Id, Email, Mdp, Photo, Nom, Is_Admin
         ]
-    conn.execute(
+    connection.execute(
         "INSERT INTO Users (Id, Email, Mdp, Photo, Nom, Is_Admin) VALUES(?, ?, ?, ?, ?, ?)", data)
-    conn.commit()
+    connection.commit()
 
 
 def insert_auteur(Id, Nom, Description, Photo, data=None):
@@ -140,9 +164,9 @@ def insert_auteur(Id, Nom, Description, Photo, data=None):
         data = [
             Id, Nom, Description, Photo
         ]
-    conn.execute(
+    connection.execute(
         "INSERT INTO Auteurs (Id, Nom, Description, Photo) VALUES(?, ?, ?, ?)", data)
-    conn.commit()
+    connection.commit()
 
 
 def insert_categorie(Id, Nom, data=None):
@@ -150,9 +174,9 @@ def insert_categorie(Id, Nom, data=None):
         data = [
             Id, Nom
         ]
-    conn.execute(
+    connection.execute(
         "INSERT INTO Categories (Id, Nom) VALUES(?, ?)", data)
-    conn.commit()
+    connection.commit()
 
 
 def insert_livre(Id, Id_Auteur, Id_Categorie, Nom, Description, Photo, ISBN, Editeur, Prix, data=None):
@@ -160,9 +184,9 @@ def insert_livre(Id, Id_Auteur, Id_Categorie, Nom, Description, Photo, ISBN, Edi
         data = [
             Id, Id_Auteur, Id_Categorie, Nom, Description, Photo, ISBN, Editeur, Prix
         ]
-    conn.execute(
+    connection.execute(
         "INSERT INTO Livres (Id, Id_Auteur, Id_Categorie, Nom, Description, Photo, ISBN, Editeur, Prix) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)", data)
-    conn.commit()
+    connection.commit()
 
 
 def insert_collection(Id, Id_User, Nom, Is_Private, data=None):
@@ -170,9 +194,9 @@ def insert_collection(Id, Id_User, Nom, Is_Private, data=None):
         data = [
             Id, Id_User, Nom, Is_Private
         ]
-    conn.execute(
+    connection.execute(
         "INSERT INTO Collections (Id, Id_User, Nom, Is_Private) VALUES(?, ?, ?, ?)", data)
-    conn.commit()
+    connection.commit()
 
 
 def insert_collec(Id_Livre, Id_Collection, data=None):
@@ -180,9 +204,9 @@ def insert_collec(Id_Livre, Id_Collection, data=None):
         data = [
             Id_Livre, Id_Collection
         ]
-    conn.execute(
+    connection.execute(
         "INSERT INTO Collec (Id_Livre, Id_Collection) VALUES(?, ?)", data)
-    conn.commit()
+    connection.commit()
 
 
 def insert_commentaires(Id_User, Id_Livre,Com, data=None):
@@ -190,9 +214,9 @@ def insert_commentaires(Id_User, Id_Livre,Com, data=None):
         data = [
             Id_User, Id_Livre, Com
         ]
-    conn.execute(
+    connection.execute(
         "INSERT INTO Commentaires (Id_User, Id_Livre, Com) VALUES(?, ?, ?)", data)
-    conn.commit()
+    connection.commit()
 
 
 def insert_users_suivi(Id_User, Id_User_Suivi, data=None):
@@ -200,9 +224,9 @@ def insert_users_suivi(Id_User, Id_User_Suivi, data=None):
         data = [
             Id_User, Id_User_Suivi
         ]
-    conn.execute(
+    connection.execute(
         "INSERT INTO Users_Suivi (Id_User, Id_User_Suivi) VALUES(?, ?)", data)
-    conn.commit()
+    connection.commit()
 
 
 def insert_auteurs_suivi(Id_User, Id_Auteur, data=None):
@@ -210,9 +234,9 @@ def insert_auteurs_suivi(Id_User, Id_Auteur, data=None):
         data = [
             Id_User, Id_Auteur
         ]
-    conn.execute(
+    connection.execute(
         "INSERT INTO Auteurs_Suivi (Id_User, Id_Auteur) VALUES(?, ?)", data)
-    conn.commit()
+    connection.commit()
 
 
 def insert_auth(Id, Token, data=None):
@@ -220,15 +244,15 @@ def insert_auth(Id, Token, data=None):
         data = [
             Id, Token
         ]
-    conn.execute(
+    connection.execute(
         "INSERT INTO Auth (Id, Token) VALUES(?, ?)", data)
-    conn.commit()
+    connection.commit()
     
 #  Fonction pour remplir la database -----------------------------------------------------------------------------------
-load_sql()
+# load_sql()
 load_data()
 
 
 # Fermer le curseur et la connexion ------------------------------------------------------------------------------------
-cur.close()
-conn.close()
+cursor.close()
+connection.close()
